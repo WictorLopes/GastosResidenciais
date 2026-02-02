@@ -7,9 +7,12 @@ O sistema é dividido em Frontend e Backend, que devem ser executados juntos par
 ## 🌐 Aplicação Online
 
 Frontend (produção):
-🔗 (em breve)
+🔗 https://gastos-residenciais-kappa.vercel.app/
 
-⚠️ Para funcionamento completo (cadastros, edição e exclusão), o backend precisa estar rodando.
+⚠️ Atenção: o backend em produção está atualmente offline.
+Os dados exibidos no site em produção são temporários e resetados automaticamente, estando disponíveis apenas para visualização da interface e funcionalidades do projeto.
+
+Para utilizar o sistema de forma completa — incluindo cadastro, edição e exclusão de dados — é necessário executar o backend localmente.
 
 
 
