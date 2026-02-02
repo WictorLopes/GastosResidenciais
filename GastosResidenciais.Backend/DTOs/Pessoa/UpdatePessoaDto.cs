@@ -2,9 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GastosResidenciais.Backend.DTOs.Pessoa
 {
-    /// <summary>
     /// DTO usado para atualização de uma pessoa.
-    /// </summary>
     public class UpdatePessoaDto
     {
         [Required(ErrorMessage = "O nome é obrigatório.")]

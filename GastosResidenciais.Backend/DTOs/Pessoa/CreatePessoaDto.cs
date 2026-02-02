@@ -2,9 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GastosResidenciais.Backend.DTOs.Pessoa
 {
-    /// <summary>
     /// DTO usado para criação de uma pessoa.
-    /// </summary>
     public class CreatePessoaDto
     {
         [Required]

@@ -2,9 +2,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GastosResidenciais.Backend.Domain.Entities
 {
-    /// <summary>
-    /// Representa uma pessoa do sistema.
-    /// </summary>
     public class Pessoa
     {
         public int Id { get; set; }
@@ -15,9 +12,8 @@ namespace GastosResidenciais.Backend.Domain.Entities
 
         public int Idade { get; set; }
 
-        /// <summary>
-        /// Transações associadas à pessoa.
-        /// </summary>
-        public ICollection<Transacao> Transacoes { get; set; } = new List<Transacao>();
+        public ICollection<Transacao> Transacoes
+        { get; set;
+        } = new List<Transacao>();
     }
 }

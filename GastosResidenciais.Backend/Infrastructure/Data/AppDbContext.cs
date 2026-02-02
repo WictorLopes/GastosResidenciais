@@ -3,10 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GastosResidenciais.Backend.Infrastructure.Data
 {
-    /// <summary>
     /// Contexto principal do banco de dados.
     /// Responsável por mapear as entidades para tabelas.
-    /// </summary>
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) :
@@ -36,7 +34,6 @@ namespace GastosResidenciais.Backend.Infrastructure.Data
                 .HasConversion<int>();
 
             // Delete em cascata:
-            // Se uma pessoa for removida, todas as transações dela também serão
             modelBuilder
                 .Entity<Transacao>()
                 .HasOne(t => t.Pessoa)

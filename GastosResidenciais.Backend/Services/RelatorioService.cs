@@ -5,9 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GastosResidenciais.Backend.Services
 {
-    /// <summary>
     /// Serviço responsável pelas consultas e relatórios financeiros.
-    /// </summary>
     public class RelatorioService
     {
         private readonly AppDbContext _context;
@@ -17,10 +15,6 @@ namespace GastosResidenciais.Backend.Services
             _context = context;
         }
 
-        /// <summary>
-        /// Retorna os totais de receitas, despesas e saldo por pessoa,
-        /// além do total geral do sistema.
-        /// </summary>
         public async Task<TotaisGeraisDto> ObterTotaisPorPessoaAsync()
         {
             var pessoas =
@@ -47,6 +41,47 @@ namespace GastosResidenciais.Backend.Services
                     .Add(new TotaisPorPessoaDto {
                         PessoaId = pessoa.Id,
                         Pessoa = pessoa.Nome,
+                        TotalReceitas = totalReceitas,
+                        TotalDespesas = totalDespesas
+                    });
+
+                resultado.TotalReceitas += totalReceitas;
+                resultado.TotalDespesas += totalDespesas;
+            }
+
+            return resultado;
+        }
+
+        public async Task<TotaisGeraisPorCategoriaDto>
+        ObterTotaisPorCategoriaAsync()
+        {
+            var categorias =
+                await _context
+                    .Categorias
+                    .Include(c => c.Transacoes)
+                    .ToListAsync();
+
+            var resultado = new TotaisGeraisPorCategoriaDto();
+
+            foreach (var categoria in categorias)
+            {
+                var totalReceitas =
+                    categoria
+                        .Transacoes
+                        .Where(t => t.Tipo == TipoTransacao.Receita)
+                        .Sum(t => t.Valor);
+
+                var totalDespesas =
+                    categoria
+                        .Transacoes
+                        .Where(t => t.Tipo == TipoTransacao.Despesa)
+                        .Sum(t => t.Valor);
+
+                resultado
+                    .Categorias
+                    .Add(new TotaisPorCategoriaDto {
+                        CategoriaId = categoria.Id,
+                        Categoria = categoria.Descricao,
                         TotalReceitas = totalReceitas,
                         TotalDespesas = totalDespesas
                     });

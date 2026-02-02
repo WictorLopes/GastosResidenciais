@@ -3,7 +3,7 @@ import { Home, Users, PieChart, Tag } from "lucide-react";
 
 export function Navbar() {
   const location = useLocation();
-  const navigate = useNavigate(); // <- para navegação programática
+  const navigate = useNavigate();
 
   const navItems = [
     { path: "/", label: "Dashboard", icon: <Home className="w-5 h-5" /> },
@@ -18,7 +18,6 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 bg-white shadow-lg border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo como botão */}
           <button
             onClick={() => navigate("/")}
             className="flex items-center gap-3 px-2 py-1 rounded-xl hover:bg-gray-100 transition"
@@ -31,7 +30,6 @@ export function Navbar() {
             </h1>
           </button>
 
-          {/* Navigation */}
           <div className="flex space-x-1">
             {navItems.map((item) => (
               <Link

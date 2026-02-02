@@ -1,14 +1,12 @@
-using System.Collections.Generic;
-
 namespace GastosResidenciais.Backend.DTOs.Relatorios
 {
-    /// DTO que representa o resumo geral do sistema.
-    public class TotaisGeraisDto
+    public class TotaisGeraisPorCategoriaDto
     {
-        public List<TotaisPorPessoaDto> Pessoas { get; set; } = new();
+        public List<TotaisPorCategoriaDto> Categorias { get; set; } = new();
 
         public decimal TotalReceitas { get; set; }
         public decimal TotalDespesas { get; set; }
+
         public decimal SaldoGeral => TotalReceitas - TotalDespesas;
     }
 }

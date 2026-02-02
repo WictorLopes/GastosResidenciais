@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GastosResidenciais.Backend.Controllers
 {
-    /// <summary>
     /// Controller responsável pelas consultas de totais e relatórios.
-    /// </summary>
     [ApiController]
     [Route("api/relatorios")]
     public class RelatoriosController : ControllerBase
@@ -17,15 +15,16 @@ namespace GastosResidenciais.Backend.Controllers
             _service = service;
         }
 
-        /// <summary>
-        /// Consulta os totais de receitas, despesas e saldo por pessoa,
-        /// incluindo o total geral do sistema.
-        /// </summary>
         [HttpGet("totais-por-pessoa")]
         public async Task<IActionResult> TotaisPorPessoa()
         {
-            var resultado = await _service.ObterTotaisPorPessoaAsync();
-            return Ok(resultado);
+            return Ok(await _service.ObterTotaisPorPessoaAsync());
+        }
+
+        [HttpGet("totais-por-categoria")]
+        public async Task<IActionResult> TotaisPorCategoria()
+        {
+            return Ok(await _service.ObterTotaisPorCategoriaAsync());
         }
     }
 }

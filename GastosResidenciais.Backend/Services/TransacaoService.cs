@@ -6,9 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GastosResidenciais.Backend.Services
 {
-    /// <summary>
     /// Serviço responsável pelas regras de negócio das transações.
-    /// </summary>
     public class TransacaoService
     {
         private readonly AppDbContext _context;
@@ -18,9 +16,6 @@ namespace GastosResidenciais.Backend.Services
             _context = context;
         }
 
-        /// <summary>
-        /// Cria uma nova transação aplicando todas as regras do sistema.
-        /// </summary>
         public async Task<TransacaoResponseDto> CriarAsync(CreateTransacaoDto dto)
         {
             var pessoa = await _context.Pessoas.FindAsync(dto.PessoaId)
@@ -55,7 +50,6 @@ namespace GastosResidenciais.Backend.Services
             _context.Transacoes.Add(transacao);
             await _context.SaveChangesAsync();
 
-            // Carrega navegações para retorno
             await _context.Entry(transacao).Reference(t => t.Pessoa).LoadAsync();
             await _context.Entry(transacao).Reference(t => t.Categoria).LoadAsync();
 
@@ -80,9 +74,6 @@ namespace GastosResidenciais.Backend.Services
             };
         }
 
-        /// <summary>
-        /// Lista todas as transações cadastradas.
-        /// </summary>
         public async Task<List<TransacaoResponseDto>> ListarAsync()
         {
             return await _context.Transacoes
@@ -109,9 +100,7 @@ namespace GastosResidenciais.Backend.Services
                 })
                 .ToListAsync();
         }
-        /// <summary>
-        /// Atualiza uma transação existente.
-        /// </summary>
+
         public async Task<Transacao> AtualizarAsync(int id, UpdateTransacaoDto dto)
         {
             var transacao = await _context.Transacoes.FindAsync(id);
@@ -131,9 +120,6 @@ namespace GastosResidenciais.Backend.Services
             return transacao;
         }
 
-        /// <summary>
-        /// Exclui uma transação existente.
-        /// </summary>
         public async Task ExcluirAsync(int id)
         {
             var transacao = await _context.Transacoes.FindAsync(id);

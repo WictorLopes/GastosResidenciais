@@ -149,3 +149,4 @@ C:\Users\wicto\OneDrive\Documents\GastosResidenciais\GastosResidenciais.Backend\
 C:\Users\wicto\OneDrive\Documents\GastosResidenciais\GastosResidenciais.Backend\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\wicto\OneDrive\Documents\GastosResidenciais\GastosResidenciais.Backend\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\wicto\OneDrive\Documents\GastosResidenciais\GastosResidenciais.Backend\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\wicto\OneDrive\Documents\GastosResidenciais\GastosResidenciais.Backend\obj\Debug\net10.0\GastosResidenciais.Backend.sourcelink.json

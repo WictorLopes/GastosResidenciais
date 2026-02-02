@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GastosResidenciais.Backend.Controllers
 {
-    /// <summary>
     /// Controller responsável pelo gerenciamento de transações.
-    /// </summary>
     [ApiController]
     [Route("api/transacoes")]
     public class TransacoesController : ControllerBase
@@ -18,9 +16,6 @@ namespace GastosResidenciais.Backend.Controllers
             _service = service;
         }
 
-        /// <summary>
-        /// Cria uma nova transação.
-        /// </summary>
         [HttpPost]
         public async Task<IActionResult>
         Criar([FromBody] CreateTransacaoDto dto)
@@ -32,23 +27,16 @@ namespace GastosResidenciais.Backend.Controllers
             }
             catch (Exception ex)
             {
-                // Retorna erro de regra de negócio de forma clara
                 return BadRequest(new { erro = ex.Message });
             }
         }
 
-        /// <summary>
-        /// Lista todas as transações.
-        /// </summary>
         [HttpGet]
         public async Task<IActionResult> Listar()
         {
             return Ok(await _service.ListarAsync());
         }
 
-        /// <summary>
-        /// Atualiza uma transação existente.
-        /// </summary>
         [HttpPut("{id}")]
         public async Task<IActionResult>
         Atualizar(int id, [FromBody] UpdateTransacaoDto dto)
@@ -68,9 +56,6 @@ namespace GastosResidenciais.Backend.Controllers
             }
         }
 
-        /// <summary>
-        /// Exclui uma transação existente.
-        /// </summary>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Excluir(int id)
         {
