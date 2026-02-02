@@ -41,6 +41,9 @@ export function Transacoes() {
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [editandoId, setEditandoId] = useState<number | null>(null);
+  const [filtroTipo, setFiltroTipo] = useState<"todas" | "Receita" | "Despesa">(
+    "todas",
+  );
   const [totaisPessoa, setTotaisPessoa] =
     useState<TotaisGeraisPorPessoa | null>(null);
   const [totaisCategoria, setTotaisCategoria] =
@@ -83,6 +86,10 @@ export function Transacoes() {
     },
     { receitas: 0, despesas: 0, saldo: 0 },
   );
+  const transacoesFiltradas =
+    filtroTipo === "todas"
+      ? transacoes
+      : transacoes.filter((t) => tipoParaString(t.tipo) === filtroTipo);
 
   function tipoParaString(tipo: number) {
     return tipo === 1 ? "Receita" : "Despesa";
@@ -278,8 +285,28 @@ export function Transacoes() {
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200">
             <h2 className="text-xl font-semibold text-gray-800">
-              Transações Cadastradas ({transacoes.length})
+              Transações Cadastradas ({transacoesFiltradas.length})
             </h2>
+
+            <div className="mt-4 flex gap-3 items-center">
+              <label className="text-sm font-medium text-gray-600">
+                Filtrar por tipo:
+              </label>
+
+              <select
+                value={filtroTipo}
+                onChange={(e) =>
+                  setFiltroTipo(
+                    e.target.value as "todas" | "Receita" | "Despesa",
+                  )
+                }
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="todas">Todas</option>
+                <option value="Receita">Receitas</option>
+                <option value="Despesa">Despesas</option>
+              </select>
+            </div>
           </div>
 
           {loading ? (
@@ -322,7 +349,7 @@ export function Transacoes() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {transacoes.map((t) => (
+                  {transacoesFiltradas.map((t) => (
                     <tr
                       key={t.id}
                       className="hover:bg-gray-50 transition-colors"

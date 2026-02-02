@@ -1,9 +1,20 @@
 import { api } from "./axios";
 import type { Transacao } from "../types/Transacao";
+import { transacoesMock } from "../mocks/transacoes.mock";
+
 
 export async function listarTransacoes() {
-  const { data } = await api.get<Transacao[]>("/transacoes");
-  return data;
+    try {
+  const response = await api.get<Transacao[]>("/transacoes");
+   if (!response.data || response.data.length === 0) {
+      throw new Error("Sem dados");
+    }
+
+    return response.data;
+   } catch {
+    console.warn("Mock transações");
+    return transacoesMock;
+  }
 }
 
 import type { CreateTransacaoPayload } from "../types/Transacao";

@@ -1,9 +1,21 @@
 import { api } from "./axios";
 import type { Pessoa } from "../types/Pessoa";
+import { pessoasMock } from "../mocks/pessoas.mock";
+
 
 export async function listarPessoas() {
-  const { data } = await api.get<Pessoa[]>("/pessoas");
-  return data;
+  try {
+    const response = await api.get("/pessoas");
+
+    if (!response.data || response.data.length === 0) {
+      throw new Error();
+    }
+
+    return response.data;
+  } catch {
+    console.warn("⚠️ Mock pessoas");
+    return pessoasMock;
+  }
 }
 
 export async function criarPessoa(pessoa: Omit<Pessoa, "id">) {
