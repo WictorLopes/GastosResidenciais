@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getRelatorio } from "../api/relatorioService";
 import type { Relatorio } from "../types/Relatorio";
-import { TrendingUp, TrendingDown, DollarSign, Loader2 } from "lucide-react";
+import { TrendingUp, TrendingDown, DollarSign, } from "lucide-react";
 
 export function Dashboard() {
   const [data, setData] = useState<Relatorio | null>(null);
@@ -18,8 +18,57 @@ export function Dashboard() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
+      <div className="p-4 md:p-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Header Skeleton */}
+          <div className="mb-8">
+            <div className="h-10 w-64 bg-gray-300 rounded-lg animate-pulse mb-3"></div>
+            <div className="h-4 w-80 bg-gray-300 rounded-lg animate-pulse"></div>
+          </div>
+
+          {/* Cards Grid Skeleton */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
+            <div className="bg-gradient-to-r from-gray-200 to-gray-300 rounded-2xl p-6 animate-pulse">
+              <div className="flex justify-between">
+                <div className="space-y-3">
+                  <div className="h-5 w-24 bg-gray-400 rounded"></div>
+                  <div className="h-9 w-36 bg-gray-400 rounded"></div>
+                </div>
+                <div className="w-12 h-12 bg-gray-400 rounded-full"></div>
+              </div>
+              <div className="mt-6 pt-4 border-t border-gray-300/50">
+                <div className="h-4 w-32 bg-gray-400 rounded"></div>
+              </div>
+            </div>
+
+            {[1, 2].map((i) => (
+              <div
+                key={i}
+                className="bg-gradient-to-r from-gray-200 to-gray-300 rounded-2xl p-6 animate-pulse"
+              >
+              </div>
+            ))}
+          </div>
+
+          {/* Resumo Section Skeleton */}
+          <div className="bg-gray-200 rounded-2xl p-6 animate-pulse">
+            <div className="h-7 w-32 bg-gray-400 rounded mb-6"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <div className="h-5 w-40 bg-gray-400 rounded mb-4"></div>
+                <div className="space-y-3">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="h-14 bg-gray-300 rounded-lg"></div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="h-5 w-32 bg-gray-400 rounded mb-4"></div>
+                <div className="h-32 bg-gray-300 rounded-lg"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -58,7 +107,7 @@ export function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4 md:p-8">
+    <div className="bg-gradient-to-br from-gray-50 to-gray-100 px-4 md:px-8 py-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">

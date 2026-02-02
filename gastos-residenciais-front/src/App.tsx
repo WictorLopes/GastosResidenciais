@@ -9,9 +9,10 @@ import { Categorias } from "./pages/Categorias";
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen flex flex-col bg-gray-50 overflow-x-hidden">
         <Navbar />
-        <main className="pb-8">
+        
+        <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/pessoas" element={<Pessoas />} />

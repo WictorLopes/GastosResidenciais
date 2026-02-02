@@ -27,6 +27,7 @@ import type {
   TotaisGeraisPorPessoa,
   TotaisGeraisPorCategoria,
 } from "../types/Relatorio";
+import { Skeleton } from "../components/Skeleton";
 
 export function Transacoes() {
   const [transacoes, setTransacoes] = useState<Transacao[]>([]);
@@ -188,8 +189,209 @@ export function Transacoes() {
     }
   }
 
+  // Skeleton enquanto carrega
+  if (loading) {
+    return (
+      <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-8">
+        <div className="max-w-6xl mx-auto">
+          
+          {/* Header Skeleton */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-8 h-8 bg-gray-300 rounded-full animate-pulse"></div>
+            <Skeleton className="h-10 w-72" />
+          </div>
+
+          {/* Form Card Skeleton */}
+          <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 animate-pulse">
+            <Skeleton className="h-7 w-60 mb-6" />
+            
+            {/* Grid de 6 colunas skeleton */}
+            <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mb-4">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="space-y-2">
+                  <Skeleton className="h-4 w-24" />
+                  <Skeleton className="h-12 w-full" />
+                </div>
+              ))}
+            </div>
+
+            <div className="flex gap-3 mt-6">
+              <Skeleton className="h-12 w-40 rounded-lg" />
+            </div>
+          </div>
+
+          {/* Lista Card Skeleton */}
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse mb-10">
+            <div className="px-6 py-4 border-b border-gray-200">
+              <div className="flex justify-between items-center">
+                <Skeleton className="h-7 w-64" />
+                <Skeleton className="h-10 w-32" />
+              </div>
+            </div>
+
+            {/* Tabela Skeleton */}
+            <div className="p-6">
+              {/* Cabeçalho da tabela */}
+              <div className="grid grid-cols-7 gap-4 mb-4">
+                {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+                  <Skeleton key={i} className="h-6 w-full" />
+                ))}
+              </div>
+
+              {/* Linhas da tabela */}
+              <div className="space-y-4">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div key={i} className="grid grid-cols-7 gap-4 py-4 border-b border-gray-100">
+                    <Skeleton className="h-5 w-full" />
+                    <Skeleton className="h-5 w-full" />
+                    <Skeleton className="h-5 w-full" />
+                    <Skeleton className="h-5 w-full" />
+                    <Skeleton className="h-5 w-full" />
+                    <Skeleton className="h-5 w-full" />
+                    <div className="flex gap-2">
+                      <Skeleton className="w-10 h-10 rounded-lg" />
+                      <Skeleton className="w-10 h-10 rounded-lg" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Totais por Pessoa Skeleton */}
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse mb-10">
+            <div className="px-6 py-5 border-b border-gray-200">
+              <Skeleton className="h-8 w-48 mb-2" />
+              <Skeleton className="h-4 w-64" />
+            </div>
+
+            <div className="p-6">
+              {/* Filtro e cards skeleton */}
+              <div className="flex justify-between items-center mb-6">
+                <div className="flex items-center gap-4">
+                  <Skeleton className="w-12 h-12 rounded-lg" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-32" />
+                    <Skeleton className="h-6 w-24" />
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-3 gap-4">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="bg-gray-100 rounded-xl p-4">
+                      <Skeleton className="h-4 w-20 mb-2" />
+                      <Skeleton className="h-6 w-24" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tabela totais skeleton */}
+              <div className="space-y-4">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="flex justify-between items-center py-4 border-b">
+                    <div className="flex items-center gap-3">
+                      <Skeleton className="w-10 h-10 rounded-full" />
+                      <Skeleton className="h-5 w-32" />
+                    </div>
+                    <div className="grid grid-cols-3 gap-8">
+                      <div className="space-y-2">
+                        <Skeleton className="h-5 w-16" />
+                        <Skeleton className="h-2 w-24" />
+                      </div>
+                      <div className="space-y-2">
+                        <Skeleton className="h-5 w-16" />
+                        <Skeleton className="h-2 w-24" />
+                      </div>
+                      <Skeleton className="h-8 w-24 rounded-full" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Totais por Categoria Skeleton */}
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse">
+            <div className="px-6 py-5 border-b border-gray-200">
+              <Skeleton className="h-8 w-56 mb-2" />
+              <Skeleton className="h-4 w-72" />
+            </div>
+
+            <div className="p-6">
+              {/* Filtro skeleton */}
+              <div className="flex justify-between items-center mb-8">
+                <div className="flex items-center gap-4">
+                  <Skeleton className="w-12 h-12 rounded-lg" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-40" />
+                    <Skeleton className="h-10 w-48" />
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-3 gap-4">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="bg-gray-100 rounded-xl p-4">
+                      <Skeleton className="h-4 w-24 mb-2" />
+                      <Skeleton className="h-6 w-28" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Grid de categorias skeleton */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="bg-gray-50 rounded-xl p-6">
+                    <div className="flex justify-between mb-6">
+                      <div className="space-y-2">
+                        <Skeleton className="h-6 w-32" />
+                        <Skeleton className="h-4 w-20" />
+                      </div>
+                      <Skeleton className="h-8 w-20 rounded-full" />
+                    </div>
+                    
+                    {/* Gráfico skeleton */}
+                    <div className="mb-6">
+                      <Skeleton className="h-4 w-24 mb-2" />
+                      <Skeleton className="h-3 w-full rounded-full" />
+                    </div>
+                    
+                    {/* Valores skeleton */}
+                    <div className="space-y-4 mb-6">
+                      <div className="flex justify-between">
+                        <Skeleton className="h-4 w-20" />
+                        <Skeleton className="h-4 w-24" />
+                      </div>
+                      <div className="flex justify-between">
+                        <Skeleton className="h-4 w-20" />
+                        <Skeleton className="h-4 w-24" />
+                      </div>
+                    </div>
+                    
+                    {/* Saldo skeleton */}
+                    <div className="pt-5 border-t border-gray-200">
+                      <div className="flex justify-between">
+                        <div className="space-y-2">
+                          <Skeleton className="h-4 w-20" />
+                          <Skeleton className="h-6 w-28" />
+                        </div>
+                        <Skeleton className="w-12 h-12 rounded-lg" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Conteúdo real quando não está loading
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-8">
+    <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
@@ -309,11 +511,7 @@ export function Transacoes() {
             </div>
           </div>
 
-          {loading ? (
-            <div className="flex justify-center items-center py-20">
-              <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
-            </div>
-          ) : transacoes.length === 0 ? (
+          {transacoes.length === 0 ? (
             <div className="text-center py-16">
               <DollarSign className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-500 text-lg">
@@ -369,7 +567,7 @@ export function Transacoes() {
                       <td className="py-4 px-6">{t.pessoa?.nome ?? "-"}</td>
                       <td className="p-3">
                         {t.data
-                          ? new Date(t.data).toLocaleDateString("pt-BR") // formata para dd/mm/aaaa
+                          ? new Date(t.data).toLocaleDateString("pt-BR")
                           : "-"}
                       </td>
                       <td className="py-4 px-6 flex gap-2">

@@ -7,6 +7,7 @@ import {
   excluirCategoria,
 } from "../api/categoriaService";
 import { Edit, Trash2, Save, Loader2, PlusCircle, X } from "lucide-react";
+import { Skeleton } from "../components/Skeleton";
 
 export function Categorias() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
@@ -78,8 +79,92 @@ export function Categorias() {
     }
   }
 
+  // Skeleton enquanto carrega
+  if (loading) {
+    return (
+      <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-8">
+        <div className="max-w-6xl mx-auto">
+          
+          {/* Header Skeleton */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-8 h-8 bg-gray-300 rounded-full animate-pulse"></div>
+            <Skeleton className="h-10 w-64" />
+          </div>
+
+          {/* Form Card Skeleton */}
+          <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 animate-pulse">
+            <Skeleton className="h-7 w-56 mb-6" />
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div className="md:col-span-2">
+                <Skeleton className="h-5 w-24 mb-3" />
+                <Skeleton className="h-12 w-full" />
+              </div>
+              <div>
+                <Skeleton className="h-5 w-28 mb-3" />
+                <Skeleton className="h-12 w-full" />
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-6">
+              <Skeleton className="h-12 w-40 rounded-lg" />
+              <Skeleton className="h-12 w-32 rounded-lg" />
+            </div>
+          </div>
+
+          {/* Lista Card Skeleton */}
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden animate-pulse">
+            <div className="px-6 py-4 border-b border-gray-200">
+              <Skeleton className="h-7 w-72" />
+            </div>
+
+            {/* Tabela Skeleton */}
+            <div className="p-6">
+              {/* Cabeçalho da tabela */}
+              <div className="grid grid-cols-3 gap-4 mb-4">
+                <Skeleton className="h-6 w-32" />
+                <Skeleton className="h-6 w-28" />
+                <Skeleton className="h-6 w-24" />
+              </div>
+
+              {/* Linhas da tabela */}
+              <div className="space-y-4">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div key={i} className="grid grid-cols-3 gap-4 py-4 border-b border-gray-100">
+                    <div className="space-y-2">
+                      <Skeleton className="h-5 w-48" />
+                      <Skeleton className="h-4 w-32" />
+                    </div>
+                    <div>
+                      <Skeleton className="h-8 w-24 rounded-full" />
+                    </div>
+                    <div className="flex gap-2">
+                      <Skeleton className="w-10 h-10 rounded-lg" />
+                      <Skeleton className="w-10 h-10 rounded-lg" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Paginação/status skeleton */}
+              <div className="mt-8 flex justify-between items-center">
+                <Skeleton className="h-5 w-40" />
+                <div className="flex gap-2">
+                  <Skeleton className="w-10 h-10 rounded-lg" />
+                  <Skeleton className="w-10 h-10 rounded-lg" />
+                  <Skeleton className="w-10 h-10 rounded-lg" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Conteúdo real quando não está loading
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-8">
+    <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 md:p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-3 mb-8">
@@ -164,11 +249,7 @@ export function Categorias() {
             </h2>
           </div>
 
-          {loading ? (
-            <div className="flex justify-center items-center py-20">
-              <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
-            </div>
-          ) : categorias.length === 0 ? (
+          {categorias.length === 0 ? (
             <div className="text-center py-16">
               <PlusCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-500 text-lg">
