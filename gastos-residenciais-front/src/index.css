@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 🔧 ADICIONE ISSO - Reset de font-size */
+html {
+  font-size: 16px; /* Garante base 16px */
+}
+
+body {
+  font-size: 100%; /* 100% de 16px = 16px */
+  -webkit-text-size-adjust: 100%; /* Previne ajuste no iOS */
+}
